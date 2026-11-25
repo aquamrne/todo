@@ -1,12 +1,31 @@
+/* Theme: Warm — "Todo for My Dog".
+   Colours come from the class Warm theme table.
+   Dark mode follows the class dark-mode rules. */
+
 :root {
-  --ink: #1f2933;
-  --ink-soft: #52606d;
-  --line: #d9e2ec;
-  --page: #f7f9fc;
-  --card: #ffffff;
-  --brand: #2f6fed;
-  --brand-dark: #1c4fbd;
-  --done: #9aa5b1;
+  color-scheme: light dark;
+
+  --bg: #fff8f1;
+  --surface: #ffffff;
+  --text: #2a1e14;
+  --muted: #6b5a4b;
+  --accent: #c2551b;
+  --accent-text: #ffffff;
+  --done: #a39283;
+  --line: #e7d9c9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151a;
+    --surface: #1c2129;
+    --text: #eef1f5;
+    --muted: #a3adba;
+    --accent: #cb6f3d; /* theme accent lightened 15% */
+    --accent-text: #12151a; /* dark text keeps 4.5:1 contrast on the lighter accent */
+    --done: #7d8794;
+    --line: #2c333d;
+  }
 }
 
 * {
@@ -16,29 +35,30 @@
 body {
   margin: 0;
   padding: 16px;
-  background: var(--page);
-  color: var(--ink);
-  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  font-size: 18px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
   line-height: 1.5;
 }
 
 .app {
-  max-width: 34rem;
+  max-width: 560px;
   margin: 0 auto;
-  padding: 24px 20px 28px;
-  background: var(--card);
+  padding: 24px;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 h1 {
-  margin: 0 0 20px;
-  font-size: 2rem;
-  line-height: 1.2;
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-/* The add form */
+/* ---------- the add form ---------- */
 
 .add-form {
   display: flex;
@@ -49,63 +69,74 @@ h1 {
 .add-form input {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 14px 12px;
-  font-size: 1rem;
-  color: var(--ink);
-  background: var(--card);
+  height: 48px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 17px;
+  color: var(--text);
+  background: var(--surface);
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
-.add-form input:focus-visible,
-.filter:focus-visible,
-.task-list button:focus-visible,
-.task-list input:focus-visible {
-  outline: 3px solid var(--brand);
-  outline-offset: 2px;
+.add-form input::placeholder {
+  color: var(--muted);
 }
 
 .add-form button {
   flex: 0 0 auto;
-  padding: 14px 20px;
-  font-size: 1rem;
+  min-width: 44px;
+  min-height: 48px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 17px;
   font-weight: 600;
-  color: #ffffff;
-  background: var(--brand);
-  border: none;
-  border-radius: 10px;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
   cursor: pointer;
 }
 
 .add-form button:hover {
-  background: var(--brand-dark);
+  background: var(--accent);
+  filter: brightness(0.95);
 }
 
-/* Filter buttons */
+/* ---------- the filter buttons ---------- */
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
 }
 
 .filter {
-  padding: 8px 14px;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  background: var(--card);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--muted);
+  background: var(--surface);
   border: 2px solid var(--line);
-  border-radius: 999px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
-.filter[aria-pressed="true"] {
-  color: #ffffff;
-  background: var(--brand);
-  border-color: var(--brand);
+.filter:hover {
+  color: var(--text);
+  border-color: var(--muted);
 }
 
-/* The task list */
+.filter[aria-pressed="true"] {
+  color: var(--accent-text);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- the task list ---------- */
 
 .task-list {
   margin: 0;
@@ -116,29 +147,32 @@ h1 {
 .task {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 8px;
   border-top: 1px solid var(--line);
 }
 
 .task:first-child {
-  border-top: none;
+  border-top: 0;
 }
 
+/* The whole label is a 44px tall tap area, so the tick box is easy to hit. */
 .task label {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex: 1 1 auto;
   min-width: 0;
+  min-height: 44px;
+  padding: 8px 0;
   cursor: pointer;
 }
 
 .task input[type="checkbox"] {
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  accent-color: var(--brand);
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
@@ -153,33 +187,48 @@ h1 {
 
 .task .delete {
   flex: 0 0 auto;
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  background: var(--card);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--muted);
+  background: var(--surface);
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
 .task .delete:hover {
-  color: #b42318;
-  border-color: #f3b6b1;
+  color: var(--text);
+  border-color: var(--muted);
 }
 
-/* Empty message and counter */
+/* ---------- empty line and counter ---------- */
 
 .empty {
   margin: 16px 0 0;
-  color: var(--ink-soft);
+  font-size: 15px;
+  color: var(--muted);
 }
 
 .counter {
-  margin: 20px 0 0;
+  margin: 24px 0 0;
   padding-top: 16px;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
+  font-size: 15px;
+  color: var(--muted);
   border-top: 1px solid var(--line);
+}
+
+/* ---------- focus ring ---------- */
+
+.add-form input:focus-visible,
+.add-form button:focus-visible,
+.filter:focus-visible,
+.task input:focus-visible,
+.task .delete:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .visually-hidden {
@@ -194,21 +243,18 @@ h1 {
   border: 0;
 }
 
-@media (max-width: 420px) {
-  body {
-    padding: 10px;
-  }
+/* ---------- small screens ---------- */
 
+@media (max-width: 420px) {
   .app {
-    padding: 20px 14px 24px;
-    border-radius: 12px;
+    padding: 16px;
   }
 
   h1 {
-    font-size: 1.7rem;
+    font-size: 26px;
   }
 
   .add-form button {
-    padding: 14px 16px;
+    padding: 0 12px;
   }
 }
