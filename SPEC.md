@@ -18,6 +18,7 @@
 ## Done when
 
 - [ ] A task can be added in 5 seconds or less.
+- [ ] Tasks can be toggled as completed or not.
 - [ ] Tasks are still there after a reload.
 
 ## Not now
