@@ -1,0 +1,214 @@
+:root {
+  --ink: #1f2933;
+  --ink-soft: #52606d;
+  --line: #d9e2ec;
+  --page: #f7f9fc;
+  --card: #ffffff;
+  --brand: #2f6fed;
+  --brand-dark: #1c4fbd;
+  --done: #9aa5b1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 24px 20px 28px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* The add form */
+
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.add-form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 12px;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+}
+
+.add-form input:focus-visible,
+.filter:focus-visible,
+.task-list button:focus-visible,
+.task-list input:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.add-form button {
+  flex: 0 0 auto;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--brand);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.add-form button:hover {
+  background: var(--brand-dark);
+}
+
+/* Filter buttons */
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.filter[aria-pressed="true"] {
+  color: #ffffff;
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+/* The task list */
+
+.task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.task:first-child {
+  border-top: none;
+}
+
+.task label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.task input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+.task .text {
+  overflow-wrap: anywhere;
+}
+
+.task.is-done .text {
+  color: var(--done);
+  text-decoration: line-through;
+}
+
+.task .delete {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.task .delete:hover {
+  color: #b42318;
+  border-color: #f3b6b1;
+}
+
+/* Empty message and counter */
+
+.empty {
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+}
+
+.counter {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 10px;
+  }
+
+  .app {
+    padding: 20px 14px 24px;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .add-form button {
+    padding: 14px 16px;
+  }
+}
