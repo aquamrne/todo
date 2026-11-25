@@ -22,3 +22,21 @@
 - [ ] Tasks are still there after a reload.
 
 ## Not now
+
+## Change requests
+
+### 2026-11-25 · Part 4 card — a long list needs a scroll and a search
+
+- **Who:** My Dog.
+- **What:** the list has to stay usable when it gets long. Every task stays in the list and keeps a size that still fits, even after more tasks are added.
+- **Why:** the list is long now, and the user could not find the task they needed.
+- **When:** anytime.
+- **Where:** on a phone.
+- **How (what the learner asked for):** all items can be viewed at any time and are sized so they still fit; the tasks are still there when more are added; a scroll wheel to go through everything; a search bar to find a specific task.
+
+**Done when**
+
+- [ ] With many tasks added, every task is still in the list and can be reached.
+- [ ] The list can be scrolled through on a phone, with no sideways scrolling.
+- [ ] A search bar finds a task by its words.
+- [ ] Tasks are still there after a reload.
