@@ -11,6 +11,7 @@
   var list = document.getElementById("task-list");
   var counter = document.getElementById("counter");
   var emptyMessage = document.getElementById("empty-message");
+  var searchInput = document.getElementById("search-tasks");
   var filterButtons = document.querySelectorAll(".filter");
 
   // data: the tasks
@@ -18,6 +19,9 @@
 
   // actions: which tasks the user wants to see
   var filter = "all";
+
+  // actions: the words typed in the search box
+  var query = "";
 
   /* ---------- memory: localStorage ---------- */
 
@@ -90,18 +94,31 @@
 
   /* ---------- display: what the user sees ---------- */
 
+  function matchesSearch(task, needle) {
+    return task.text.toLowerCase().indexOf(needle) !== -1;
+  }
+
   function visibleTasks() {
+    var chosen = tasks;
+
     if (filter === "active") {
-      return tasks.filter(function (task) {
+      chosen = tasks.filter(function (task) {
         return !task.done;
       });
-    }
-    if (filter === "done") {
-      return tasks.filter(function (task) {
+    } else if (filter === "done") {
+      chosen = tasks.filter(function (task) {
         return task.done;
       });
     }
-    return tasks;
+
+    var needle = query.trim().toLowerCase();
+    if (needle === "") {
+      return chosen;
+    }
+
+    return chosen.filter(function (task) {
+      return matchesSearch(task, needle);
+    });
   }
 
   function buildTaskRow(task) {
@@ -142,6 +159,12 @@
       list.appendChild(buildTaskRow(task));
     });
 
+    if (shown.length === 0) {
+      emptyMessage.textContent =
+        query.trim() === ""
+          ? "Nothing to do for the dog right now. Add the first task above."
+          : "No task matches your search.";
+    }
     emptyMessage.hidden = shown.length !== 0;
 
     var left = tasks.filter(function (task) {
@@ -163,6 +186,8 @@
     }
     tasks.push(makeTask(clean));
     filter = "all";
+    query = "";
+    searchInput.value = "";
     saveTasks();
     render();
   }
@@ -219,6 +244,11 @@
       filter = button.dataset.filter;
       render();
     });
+  });
+
+  searchInput.addEventListener("input", function () {
+    query = searchInput.value;
+    render();
   });
 
   tasks = loadTasks();

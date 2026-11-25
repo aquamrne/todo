@@ -29,6 +29,16 @@
         <button type="button" class="filter" data-filter="done" aria-pressed="false">Done</button>
       </div>
 
+      <div class="search">
+        <label class="visually-hidden" for="search-tasks">Search tasks</label>
+        <input
+          id="search-tasks"
+          type="search"
+          placeholder="Search tasks…"
+          autocomplete="off"
+        />
+      </div>
+
       <ul class="task-list" id="task-list"></ul>
 
       <p class="empty" id="empty-message" hidden>
